@@ -9,17 +9,17 @@
       <div class="flex justify-between items-center py-4">
 
         <!-- Logo -->
-        <div class="text-2xl font-bold">MySite</div>
+        <div class="text-2xl font-bold">Sarakari Results</div>
 
         <!-- Desktop Menu -->
         <nav class="hidden md:flex space-x-6">
-          <a href="#" class="hover:text-yellow-300">Home</a>
-          <a href="#" class="hover:text-yellow-300">Latest Job</a>
-          <a href="#" class="hover:text-yellow-300">Admit Card</a>
-          <a href="#" class="hover:text-yellow-300">Result</a>
-          <a href="#" class="hover:text-yellow-300">Admission</a>
-          <a href="#" class="hover:text-yellow-300">Syllabus</a>
-          <a href="#" class="hover:text-yellow-300">Answer Key</a>
+          <a href="/" class="hover:text-yellow-300">Home</a>
+          <a href="{{route('latestjob')}}" class="hover:text-yellow-300">Latest Job</a>
+          <a href="{{route('admit_card')}}" class="hover:text-yellow-300">Admit Card</a>
+          <a href="{{route('result')}}" class="hover:text-yellow-300">Result</a>
+          <a href="{{route('admission')}}" class="hover:text-yellow-300">Admission</a>
+          <a href="{{route('syllabus')}}" class="hover:text-yellow-300">Syllabus</a>
+          <a href="{{route('answerkey')}}" class="hover:text-yellow-300">Answer Key</a>
 
           <!-- Dropdown -->
           <div class="relative group">
@@ -30,9 +30,9 @@
               </svg>
             </button>
             <div class="absolute hidden group-hover:block bg-white text-black mt-2 w-40 rounded shadow-lg z-10">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Contact</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">About</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Support</a>
+              <a href="{{route('contact')}}" class="block px-4 py-2 hover:bg-gray-100">Contact</a>
+              <a href="{{route('privacyPolicy')}}" class="block px-4 py-2 hover:bg-gray-100">Privacy Policy</a>
+              <a href="{{route('disclaimer')}}" class="block px-4 py-2 hover:bg-gray-100">Support</a>
             </div>
           </div>
         </nav>
@@ -51,14 +51,14 @@
 
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="md:hidden hidden bg-blue-700 px-4 pb-4 space-y-2">
-      <a href="#" class="block text-white hover:text-yellow-300">Home</a>
-      <a href="#" class="block text-white hover:text-yellow-300">Latest Job</a>
-      <a href="#" class="block text-white hover:text-yellow-300">Admit Card</a>
-      <a href="#" class="block text-white hover:text-yellow-300">Result</a>
-      <a href="#" class="block text-white hover:text-yellow-300">Admission</a>
-      <a href="#" class="block text-white hover:text-yellow-300">Syllabus</a>
-      <a href="#" class="block text-white hover:text-yellow-300">Answer Key</a>
-      <a href="#" class="block text-white hover:text-yellow-300">More</a>
+      <a href="/" class="block text-white hover:text-yellow-300">Home</a>
+      <a href="{{route('latestjob')}}" class="block text-white hover:text-yellow-300">Latest Job</a>
+      <a href="{{route('admit_card')}}" class="block text-white hover:text-yellow-300">Admit Card</a>
+      <a href="{{route('result')}}" class="block text-white hover:text-yellow-300">Result</a>
+      <a href="{{route('admission')}}" class="block text-white hover:text-yellow-300">Admission</a>
+      <a href="{{route('syllabus')}}" class="block text-white hover:text-yellow-300">Syllabus</a>
+      <a href="{{route('answerkey')}}" class="block text-white hover:text-yellow-300">Answer Key</a>
+      <a href="#more" class="block text-white hover:text-yellow-300">More</a>
     </div>
   </header>
 

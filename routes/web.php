@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 // FRONTEND-ROUTES::::::::;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/detail', [HomeController::class, 'detail'])->name('detail');
-
-
+Route::get('/latestjob', [HomeController::class, 'latestjob'])->name('latestjob');
+Route::get('/admit_card', [HomeController::class, 'admit_card'])->name('admit_card');
+Route::get('/admission',[HomeController::class, 'admission'])->name('admission');
+Route::get('/syllabus',[HomeController::class, 'syllabus'])->name('syllabus');
+Route::get('/answerkey',[HomeController::class, 'answerkey'])->name('answerkey');
+Route::get('/result',[HomeController::class, 'result'])->name('result');
+Route::get('/privacy-po;licy',[HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/disclaimer', [HomeController::class, 'disclaimer'])->name('disclaimer');
+// Admin Dashboard Route
+Route::get('/admin', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.index');
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth','verified'])->name('dashboard');
 
 
