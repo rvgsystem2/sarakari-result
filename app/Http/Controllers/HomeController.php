@@ -36,7 +36,7 @@ class HomeController extends Controller
         return view('frontend.answerkey');
     }
 
-    public function constact()
+    public function contact()
     {
         return view('frontend.contact');
     }
@@ -51,9 +51,9 @@ class HomeController extends Controller
         return view('frontend.privacy_policy');
     }
 
-    public function syllabus()
+    public function syllbus()
     {
-        return view('frontend.syllabus');
+        return view('frontend.syllbus');
     }
 
     public function result()

@@ -1,3 +1,5 @@
+@extends('component.main')
+@section('content')
 <div class="max-w-4xl mx-auto px-4 py-10 text-gray-800">
     <h1 class="text-3xl font-bold mb-6 border-b pb-2">Privacy Policy</h1>
 
@@ -53,3 +55,4 @@
         Last Updated: August 2, 2025
     </p>
 </div>
+@endsection

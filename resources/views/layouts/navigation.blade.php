@@ -1,102 +1,121 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-200 h-24 z-50 relative">
-    <!-- Container -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 bg-white">
+<!-- resources/views/layouts/navigation.blade.php -->
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-200 shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <!-- Left: Logo & Main Nav -->
+            <!-- Left Side -->
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="h-9 w-auto text-gray-800" />
+                        <x-application-logo class="block h-9 w-auto text-indigo-600" />
                     </a>
                 </div>
 
-                <!-- Navigation -->
-                <div class="hidden sm:flex sm:items-center sm:ms-10 text-sm font-medium text-gray-700 space-x-6" x-data="{ open: false }">
-
-                    <!-- Dashboard (Outside Dropdown) -->
+                <!-- Desktop Nav Links -->
+                <div class="hidden sm:flex sm:space-x-8 sm:ml-10">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
+                        <i class="fas fa-tachometer-alt mr-1"></i> {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <!-- Dropdown for Roles, Permissions, Users -->
-                    <div class="relative">
-                        <button @click="open = !open" class="flex items-center space-x-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md">
-                            <i class="fas fa-users-cog text-gray-600"></i>
-                            <span>Admin Tools</span>
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
+                    @can('view permission')
+                        <x-nav-link :href="route('permission.index')" :active="request()->routeIs('permission.index')">
+                            <i class="fas fa-key mr-1"></i> {{ __('Permissions') }}
+                        </x-nav-link>
+                    @endcan
 
-                        <div x-show="open" @click.away="open = false" x-cloak
-                            class="absolute z-50 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
+                    @can('view roles')
+                        <x-nav-link :href="route('role.index')" :active="request()->routeIs('role.index')">
+                            <i class="fas fa-user-shield mr-1"></i> {{ __('Roles') }}
+                        </x-nav-link>
+                    @endcan
 
-                            @can('view permission')
-                            <x-nav-link :href="route('permission.index')" :active="request()->routeIs('permission.index')" class="block px-4 py-2 text-left">
-                                <i class="fas fa-key mr-1"></i> Permissions
-                            </x-nav-link>
-                            @endcan
+                    @can('Banner')
+                        <x-nav-link :href="route('banner.index')" :active="request()->routeIs('banner.index')">
+                            <i class="fas fa-key mr-1"></i> {{ __('Banner') }}
+                        </x-nav-link>
+                    @endcan
 
-                            @can('view roles')
-                            <x-nav-link :href="route('role.index')" :active="request()->routeIs('role.index')" class="block px-4 py-2 text-left">
-                                <i class="fas fa-user-shield mr-1"></i> Roles
-                            </x-nav-link>
-                            @endcan
+                    @can('Grid')
+                    <x-nav-link :href="route('grid.index')" :active="request()->routeIs('grid.index')">
+                        <i class="fas fa-key mr-1"></i> {{ __('Grid') }}
+                    </x-nav-link>
+                @endcan
+                @can('Category')
+                <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
+                    <i class="fas fa-key mr-1"></i> {{ __('Category') }}
+                </x-nav-link>
+            @endcan
+            @can('Link')
+            <x-nav-link :href="route('link.index')" :active="request()->routeIs('link.index')">
+                <i class="fas fa-key mr-1"></i> {{ __('Link') }}
+            </x-nav-link>
+        @endcan
 
-                            @can('view users')
-                            <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class="block px-4 py-2 text-left">
-                                <i class="fas fa-users mr-1"></i> Users
-                            </x-nav-link>
-                            @endcan
-
-                        </div>
-                    </div>
+                    @can('view users')
+                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                            <i class="fas fa-users mr-1"></i> {{ __('Users') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
+            <!-- Right Side -->
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @auth
+                    <!-- User Dropdown -->
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-gray-600 bg-white hover:text-gray-800 focus:outline-none transition">
+                                <div>
+                                    {{ Auth::user()->name }}
+                                    <span class="text-xs text-gray-500">
+                                        ({{ Auth::user()->roles->pluck('name')->implode(', ') }})
+                                    </span>
+                                </div>
+                                <div class="ml-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75
+                                            0 111.08 1.04l-4.25 4.5a.75.75
+                                            0 01-1.08 0l-4.25-4.5a.75.75
+                                            0 01.02-1.06z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
 
-
-            <!-- Right: Settings -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 bg-white hover:text-gray-800 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }} ({{ Auth::user()->roles->pluck('name')->implode(', ') }})</div>
-                            <div class="ms-1">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Logout -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('profile.edit')">
+                                <i class="fas fa-user mr-1"></i> {{ __('Profile') }}
                             </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+
+                            <!-- Logout -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <i class="fas fa-sign-out-alt mr-1"></i> {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
+                @endauth
+
+                @guest
+                    <div>
+                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800 px-3">Login</a>
+                        <a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-800 px-3">Register</a>
+                    </div>
+                @endguest
             </div>
 
-            <!-- Hamburger Menu (Mobile) -->
+            <!-- Mobile Hamburger -->
             <div class="flex items-center sm:hidden">
                 <button @click="open = !open" type="button"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none transition"
-                    aria-controls="mobile-menu" :aria-expanded="open">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none transition"
+                    aria-controls="mobile-menu" :aria-expanded="open.toString()">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -118,47 +137,53 @@
             </x-responsive-nav-link>
 
             @can('view permission')
-            <x-responsive-nav-link :href="route('permission.index')" :active="request()->routeIs('permission.index')">
-                <i class="fas fa-key mr-1"></i> Permissions
-            </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('permission.index')" :active="request()->routeIs('permission.index')">
+                    <i class="fas fa-key mr-1"></i> {{ __('Permissions') }}
+                </x-responsive-nav-link>
             @endcan
 
             @can('view roles')
-            <x-responsive-nav-link :href="route('role.index')" :active="request()->routeIs('role.index')">
-                <i class="fas fa-user-shield mr-1"></i> Roles
-            </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('role.index')" :active="request()->routeIs('role.index')">
+                    <i class="fas fa-user-shield mr-1"></i> {{ __('Roles') }}
+                </x-responsive-nav-link>
             @endcan
 
             @can('view users')
-            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                <i class="fas fa-users mr-1"></i> Users
-            </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                    <i class="fas fa-users mr-1"></i> {{ __('Users') }}
+                </x-responsive-nav-link>
             @endcan
-
-
         </div>
 
         <!-- Mobile Profile Section -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
+        @auth
+            <div class="pt-4 pb-1 border-t border-gray-200">
+                <div class="px-4">
+                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Logout -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault(); this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link :href="route('profile.edit')">
+                        <i class="fas fa-user mr-1"></i> {{ __('Profile') }}
                     </x-responsive-nav-link>
-                </form>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            <i class="fas fa-sign-out-alt mr-1"></i> {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endauth
+
+        @guest
+            <div class="pt-4 pb-1 border-t border-gray-200 px-4">
+                <a href="{{ route('login') }}" class="block py-2 text-gray-600 hover:text-gray-800">Login</a>
+                <a href="{{ route('register') }}" class="block py-2 text-gray-600 hover:text-gray-800">Register</a>
+            </div>
+        @endguest
     </div>
 </nav>

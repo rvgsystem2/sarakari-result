@@ -1,7 +1,7 @@
 
 @extends('component.main')
 @section('content')
-<div class="bg-blue-50 text-center py-6 px-4 rounded-lg shadow-md max-w-4xl mx-auto">
+<div class="bg-blue-50 text-center py-6 px-12 rounded-lg shadow-md max-w-4xl mx-auto">
     <p class="text-sm md:text-base font-semibold text-gray-800">
       <strong>Sarkari Result:</strong> Get Online Form, Results, Admit Card, Answer Key, Syllabus, Career News, Sarkari Yojana, Scholarship, Sarkari Notice & More.
     </p>
@@ -397,8 +397,8 @@
 </div>
 
 {{-- section-contents --}}
-<div>
-    <p><strong>Sarkari Result 2025 :</strong> find latest Sarkari job vacancies and Sarkari exam results at Sarkariresult.com.cm Get all the information you need on govt jobs and online from, exam, results, admit card in one place</p>
+<div class="text-leading">
+    <p class="px-8"><strong>Sarkari Result 2025 :</strong> find latest Sarkari job vacancies and Sarkari exam results at Sarkariresult.com.cm Get all the information you need on govt jobs and online from, exam, results, admit card in one place</p>
 </div>
 
 <div class="max-w-6xl mx-auto my-6 p-4">

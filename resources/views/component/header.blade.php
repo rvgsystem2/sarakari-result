@@ -18,7 +18,7 @@
           <a href="{{route('admit_card')}}" class="hover:text-yellow-300">Admit Card</a>
           <a href="{{route('result')}}" class="hover:text-yellow-300">Result</a>
           <a href="{{route('admission')}}" class="hover:text-yellow-300">Admission</a>
-          <a href="{{route('syllabus')}}" class="hover:text-yellow-300">Syllabus</a>
+          <a href="{{route('syllbus')}}" class="hover:text-yellow-300">Syllabus</a>
           <a href="{{route('answerkey')}}" class="hover:text-yellow-300">Answer Key</a>
 
           <!-- Dropdown -->
@@ -56,7 +56,7 @@
       <a href="{{route('admit_card')}}" class="block text-white hover:text-yellow-300">Admit Card</a>
       <a href="{{route('result')}}" class="block text-white hover:text-yellow-300">Result</a>
       <a href="{{route('admission')}}" class="block text-white hover:text-yellow-300">Admission</a>
-      <a href="{{route('syllabus')}}" class="block text-white hover:text-yellow-300">Syllabus</a>
+      <a href="{{route('syllbus')}}" class="block text-white hover:text-yellow-300">Syllabus</a>
       <a href="{{route('answerkey')}}" class="block text-white hover:text-yellow-300">Answer Key</a>
       <a href="#more" class="block text-white hover:text-yellow-300">More</a>
     </div>
